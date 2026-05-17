@@ -73,6 +73,7 @@ La soutenance finale est evaluee de maniere **collegiale** (pairs + enseignants)
 - **Fast Downward** : planificateur PDDL de reference. [Site](https://www.fast-downward.org/)
 - **Solidity / Foundry** : developpement et test de smart contracts. [Documentation](https://docs.soliditylang.org/)
 - **PySAT** : interface Python pour solveurs SAT. [Documentation](https://pysathq.github.io/)
+- **QuantConnect Lean** : plateforme de backtest et trading algorithmique (partenariat educatif sponsorise par Jared Broad, CEO QC). [Site](https://www.quantconnect.com/), [Documentation](https://www.quantconnect.com/docs/)
 
 ### Notebooks du cours CoursIA
 Les notebooks suivants sont disponibles dans le depot CoursIA ([jsboige/CoursIA](https://github.com/jsboige/CoursIA)) et constituent des prerequis ou des points de depart pour les projets :
@@ -118,6 +119,10 @@ Les notebooks suivants sont disponibles dans le depot CoursIA ([jsboige/CoursIA]
 #### Reinforcement Learning
 
 - **RL/** : 6 notebooks — MDP, Q-learning, DQN, policy gradient, multi-agent RL (NFSP, PSRO), Stable Baselines3, Gym wrappers, HER
+
+#### Trading Algorithmique (QuantConnect)
+
+- **QuantConnect/Python/** : 40+ notebooks — QC-Py-01 a QC-Py-34 couvrant la plateforme, backtesting, indicateurs techniques, modeles alpha, ML (classification, regression, LSTM, Transformer, RL DQN/PPO/SAC), detection de regimes, LLM trading signals, et paper trading Binance/IBKR
 
 ---
 
@@ -304,6 +309,17 @@ Les notebooks suivants sont disponibles dans le depot CoursIA ([jsboige/CoursIA]
 | [R1](#r1--revision-des-croyances-par-les-postulats-agm) | Revision des croyances par les postulats AGM | 3/5 |
 | [R2](#r2--programmation-probabiliste-avec-infernet) | Programmation probabiliste avec Infer.NET | 3/5 |
 | [R3](#r3--raisonnement-epistemique-et-logique-multi-agents) | Raisonnement epistemique et logique multi-agents | 4/5 |
+
+### Categorie S : Trading Algorithmique Symbolique
+
+> Les sujets de la categorie S combinent un **noyau IA Symbolique** (logique epistemique, web semantique, verification formelle SMT, programmation probabiliste) avec une validation pratique via la plateforme [QuantConnect Lean](https://www.quantconnect.com/). Chaque projet est fondamentalement symbolique et utilise le backtest QuantConnect uniquement comme couche de validation sur donnees reelles de marche. Les etudiants ayant rejoint l'organisation QuantConnect sponsorisee par Jared Broad (CEO QC) sont encourages a choisir en priorite ces sujets.
+
+| # | Sujet | Difficulte |
+|---|-------|------------|
+| [S1](#s1--raisonnement-epistemique-pour-le-trading-multi-agents) | Raisonnement epistemique pour le trading multi-agents | 4/5 |
+| [S2](#s2--ontologies-financieres-et-web-semantique-pour-le-screening-dactifs) | Ontologies financieres et Web Semantique pour le screening d'actifs | 3/5 |
+| [S3](#s3--verification-formelle-de-protocoles-defi-par-smt) | Verification formelle de protocoles DeFi par SMT | 4/5 |
+| [S4](#s4--programmation-probabiliste-symbolique-pour-la-detection-de-regimes-de-marche) | Programmation probabiliste symbolique pour la detection de regimes de marche | 3/5 |
 
 ---
 
@@ -2709,5 +2725,136 @@ La logique epistemique formalise le raisonnement sur la connaissance et la croya
 - Baltag, A. & Moss, L.S. (2004). "Logics for Epistemic Programs." *Knowledge, Rationality and Action*, Synthese, 139(2), 165-224. [Springer](https://doi.org/10.1023/B:SYNT.0000024912.74661.2c)
 
 ### Difficulte : 4/5
+
+---
+
+### Categorie S : Trading Algorithmique Symbolique
+
+#### S1 — Raisonnement epistemique pour le trading multi-agents
+
+La logique epistemique formalise le raisonnement sur la connaissance et la croyance d'agents rationnels dans un systeme multi-agents. Appliquee au trading algorithmique, elle permet de modeliser l'information asymetrique entre participants du marche : chaque agent possede des croyances partielles sur l'etat du marche et doit raisonner sur ce que les autres agents savent (ou croient savoir) a partir du flux d'ordres observable. Les modeles de Kripke multi-agents capturant ces croyances imbriquees, combines aux mecanismes de mise a jour par annonce publique (Dynamic Epistemic Logic), offrent un cadre formel pour deduire l'information privee a partir du comportement observable. Ce sujet demande d'implementer un systeme de raisonnement epistemique complet (modeles de Kripke, operateurs Ki/E/C, public announcements) et de l'appliquer a des scenarios de marche simule puis valide par backtest QuantConnect.
+
+### Objectifs
+- Implementer un modele de Kripke multi-agents avec relations d'accessibilite par agent et evaluateur de formules epistemiques (Ki, E, C)
+- Modeliser des scenarios de marche a information asymetrique (insider trading, adverse selection, signal par ordres) et raisonner sur les croyances inferees
+- Implementer les mises a jour epistemiques dynamiques (public announcements, observation privee) via Dynamic Epistemic Logic
+- Simuler un mecanisme de market-making ou le raisonnement epistemique guide les decisions d'achat/vente en deduisant l'information privee du flux d'ordres
+- Valider par backtest QuantConnect Lean sur donnees reelles de marche avec la strategie epistemique contre un baseline aleatoire
+
+### Notebooks CoursIA pertinents
+
+| Notebook | Chemin | Pertinence |
+|----------|--------|------------|
+| Tweety-3 Modal Logic | [SymbolicAI/Tweety/Tweety-3-Modal-Logic.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/Tweety/Tweety-3-Modal-Logic.ipynb) | Logiques modales, modeles de Kripke |
+| GT-11 Bayesian Games | [GameTheory/GameTheory-11-Bayesian-Games.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/GameTheory/GameTheory-11-Bayesian-Games.ipynb) | Information asymetrique, croyances |
+| Linq2Z3 | [SymbolicAI/Linq2Z3.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/Linq2Z3.ipynb) | Resolution de contraintes |
+| QC-Py-08 Multi-Asset | [QuantConnect/Python/QC-Py-08-Multi-Asset-Strategies.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/QuantConnect/Python/QC-Py-08-Multi-Asset-Strategies.ipynb) | Strategies multi-actifs, correlations |
+| QC-Py-13 Alpha Models | [QuantConnect/Python/QC-Py-13-Alpha-Models.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/QuantConnect/Python/QC-Py-13-Alpha-Models.ipynb) | Modeles alpha, signaux |
+
+### References externes
+- Fagin, R. et al. (1995). *Reasoning About Knowledge*. MIT Press. [MIT Press](https://mitpress.mit.edu/9780262562003/reasoning-about-knowledge/)
+- Ditmarsch, H. van et al. (2007). *Dynamic Epistemic Logic*. Springer. [Springer](https://doi.org/10.1007/978-1-4020-5839-4)
+- Kyle, A.S. (1985). "Continuous Auctions and Insider Trading." *Econometrica*, 53(6), 1315-1335. [JSTOR](https://www.jstor.org/stable/1913210)
+- Ditmarsch, H. van (2023). "Epistemic Logic." *Stanford Encyclopedia of Philosophy*. [SEP](https://plato.stanford.edu/entries/logic-epistemic/)
+- O'Hara, M. (1995). *Market Microstructure Theory*. Blackwell. [Wiley](https://www.wiley.com/en-us/Market+Microstructure+Theory-p-9780631207610)
+
+### Difficulte : 4/5
+
+---
+
+#### S2 — Ontologies financieres et Web Semantique pour le screening d'actifs
+
+Le Web Semantique offre un cadre formel pour representer, interroger et raisonner sur des connaissances structurees via des ontologies (OWL), des requetes (SPARQL) et des mecanismes de raisonnement (description logics, DL). Applique au screening d'actifs financiers, ce paradigme permet de capturer des relations semantiques entre entites (societes, secteurs, filiales, produits, risques ESG) qu'un filtrage numerique classique ne peut pas exprimer : une requete SPARQL peut deduire qu'une societe est exposee au lithium via sa filiale miniere, ou detecter un greenwashing en confrontant les declarations ESG a la structure reelle du groupe. Le raisonnement DL (subsomption, classification automatique, coherence) ajoute une couche deductive qui enrichit l'ontologie au-dela des faits explicitement encodes. Ce sujet demande de construire une ontologie financiere, de l'interroger par SPARQL, et de valider les decisions de screening par backtest QuantConnect.
+
+### Objectifs
+- Construire une ontologie financiere en OWL couvrant societes, secteurs, filiales, instruments, risques ESG et classifications regulatorires (GICS, NACE)
+- Implementer un raisonneur DL (classification, subsomption, detection d'incoherence) et l'appliquer pour inferer des classifications automatiques (style drift, exposition sectorielle cachee, greenwashing)
+- Developper des requetes SPARQL pour le screening semantique d'actifs et comparer les resultats avec un filtrage numerique classique
+- Valider les decisions de screening par backtest QuantConnect Lean sur l'univers S&P 500 avec rebalance trimestriel et mesure de performance vs benchmark
+- Evaluer l'apport du raisonnement semantique par rapport a un screening pur par indicateurs numeriques
+
+### Notebooks CoursIA pertinents
+
+| Notebook | Chemin | Pertinence |
+|----------|--------|------------|
+| SemanticWeb-1 Ontology | [SymbolicAI/SemanticWeb/SemanticWeb-1-Ontology-Engineering.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/SemanticWeb/SemanticWeb-1-Ontology-Engineering.ipynb) | Ontologies OWL, engineering |
+| SemanticWeb-2 SPARQL | [SymbolicAI/SemanticWeb/SemanticWeb-2-SPARQL-Query.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/SemanticWeb/SemanticWeb-2-SPARQL-Query.ipynb) | Requetes SPARQL |
+| SemanticWeb-3 OWL-RL | [SymbolicAI/SemanticWeb/SemanticWeb-3-OWL-RL-Reasoning.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/SemanticWeb/SemanticWeb-3-OWL-RL-Reasoning.ipynb) | Raisonnement OWL-RL |
+| SemanticWeb-4 SHACL | [SymbolicAI/SemanticWeb/SemanticWeb-4-SHACL-Validation.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/SemanticWeb/SemanticWeb-4-SHACL-Validation.ipynb) | Validation de contraintes |
+| QC-Py-05 Universe Selection | [QuantConnect/Python/QC-Py-05-Universe-Selection.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/QuantConnect/Python/QC-Py-05-Universe-Selection.ipynb) | Selection d'univers, filtrage |
+| QC-Py-16 Alternative Data | [QuantConnect/Python/QC-Py-16-Alternative-Data.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/QuantConnect/Python/QC-Py-16-Alternative-Data.ipynb) | Donnees alternatives, ESG |
+
+### References externes
+- Horrocks, I. (2008). "Ontologies and the Semantic Web." *Communications of the ACM*, 51(12), 58-67. [ACM](https://dl.acm.org/doi/10.1145/1409360.1409377)
+- Baader, F. et al. (2003). *The Description Logic Handbook*. Cambridge University Press. [Cambridge](https://doi.org/10.1017/CBO9780511711789)
+- W3C. "OWL 2 Web Ontology Language." [w3.org](https://www.w3.org/TR/owl2-overview/)
+- Perez, J. et al. (2006). "Semantics and Complexity of SPARQL." *ISWC 2006*. [Springer](https://doi.org/10.1007/11860550_2)
+- GICS - Global Industry Classification Standard. [msci.com](https://www.msci.com/our-solutions/indexes/gics)
+
+### Difficulte : 3/5
+
+---
+
+#### S3 — Verification formelle de protocoles DeFi par SMT
+
+Les protocoles de finance decentrlaisee (DeFi) gerent des milliards de dollars de valeur verrouillee totale (TVL) dans des smart contracts dont la correction repose entierement sur des invariants mathematiques : invariants de liquidite (constamment plus de collateral que d'emprunts), absence de sentiers d'arbitrage exploitables par flash loans, et proprietes de fair ordering. La verification formelle par SMT (Satisfiability Modulo Theories) permet d'encoder ces invariants comme des contraintes et de prouver formellement leur preservation sur tous les etats accessibles du protocole — ou de produire un contre-exemple (attaque). Ce sujet demande de modeliser un protocole DeFi simplifie (lending pool, DEX AMM) en logique du premier ordre, d'encoder les proprietes de surete comme formules SMT, et de valider les resultats contre des scenarios d'attaque realistes.
+
+### Objectifs
+- Modeliser un protocole DeFi simplifie (lending pool type Aave ou AMM type Uniswap) comme machine a etats avec transitions encodees en logique du premier ordre
+- Encoder les invariants de surete (liquidite, solvabilite, absence de flash loan attack) comme formules SMT et prouver leur preservation par Z3
+- Implementer la verification de bounded model checking : enumerer les etats accessibles jusqu'a une profondeur N et verifier les invariants a chaque pas
+- Generer des contre-exemples (sequences d'attaques) lorsque les invariants sont violonnes et les valider sur des scenarios de marche
+- Valider les conditions de bord detectees par verification formelle contre des donnees de marche crypto via QuantConnect
+
+### Notebooks CoursIA pertinents
+
+| Notebook | Chemin | Pertinence |
+|----------|--------|------------|
+| SC-14 Formal Verification | [SymbolicAI/SmartContracts/SC-14-Formal-Verification.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/SmartContracts/SC-14-Formal-Verification.ipynb) | Verification formelle Solidity |
+| SC-15 Zero-Knowledge Proofs | [SymbolicAI/SmartContracts/SC-15-Zero-Knowledge-Proofs.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/SmartContracts/SC-15-Zero-Knowledge-Proofs.ipynb) | ZKP, circuits arithmetiques |
+| SC-13 Fuzz Testing | [SymbolicAI/SmartContracts/SC-13-Fuzz-Testing.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/SmartContracts/SC-13-Fuzz-Testing.ipynb) | Fuzzing, detection de bugs |
+| Linq2Z3 | [SymbolicAI/Linq2Z3.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/Linq2Z3.ipynb) | Z3 SMT Solver |
+| QC-Py-07 Futures/Forex | [QuantConnect/Python/QC-Py-07-Futures-Forex.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/QuantConnect/Python/QC-Py-07-Futures-Forex.ipynb) | Marches crypto, donnees |
+
+### References externes
+- Passerone, C. et al. (2008). "From Simulink to SMT-Based Model Checking." *FM 2008*. [Springer](https://doi.org/10.1007/978-3-540-68270-6_2)
+- Biere, A. et al. (1999). "Symbolic Model Checking without BDDs." *TACAS 1999*. [Springer](https://doi.org/10.1007/3-540-49059-0_14)
+- de Moura, L. & Bjorner, N. (2008). "Z3: An Efficient SMT Solver." *TACAS 2008*. [Springer](https://doi.org/10.1007/978-3-540-78800-3_24)
+- Werner, S.M. et al. (2022). "SoK: Decentralized Finance (DeFi) Incidents." *Financial Cryptography 2022*. [arXiv](https://arxiv.org/abs/2112.11433)
+- Consensys. "Smart Contract Best Practices." [consensys.github.io](https://consensys.github.io/smart-contract-best-practices/)
+
+### Difficulte : 4/5
+
+---
+
+#### S4 — Programmation probabiliste symbolique pour la detection de regimes de marche
+
+La detection de regimes de marche (bull, bear, range, crash) est un probleme classique en finance quantitative qui se prete naturellement a une approche hybride symbolique-probabiliste. Un modele de Markov cache (HMM) bayesien detecte les regimes numeriquement, mais ne peut pas raisonner sur la coherence logique des transitions (un crash ne suit pas directement un bull sans transition). En combinant programmation probabiliste (Infer.NET) pour la detection numerique, revision des croyances AGM pour la mise a jour symbolique des hypotheses de regime, et raisonnement qualitatif (qualitative probability, TCP) pour les contraintes de transition, on obtient un systeme qui detecte les regimes plus robustement qu'un HMM pur. Ce sujet demande d'implementer les trois couches et de valider la strategie multi-regime par backtest QuantConnect.
+
+### Objectifs
+- Implementer un HMM bayesien avec Infer.NET pour la detection probabiliste des regimes de marche sur des series temporelles financieres
+- Construire un module de revision des croyances AGM qui maintient les hypotheses de regime courant et les met a jour symboliquement face aux observations contradictoires
+- Implementer un raisonneur qualitatif (qualitative probability, algebre de transition) qui contraint les transitions de regime a etre logiquement coherentes
+- Developper une strategie d'allocation multi-regime ou les poids changent en fonction du regime symboliquement deduit
+- Valider par backtest QuantConnect Lean sur un univers multi-actif avec rebalance mensuel et comparaison vs HMM pur et vs buy-and-hold
+
+### Notebooks CoursIA pertinents
+
+| Notebook | Chemin | Pertinence |
+|----------|--------|------------|
+| Probas Infer-101 | [Probas/Infer-101.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/Probas/Infer-101.ipynb) | Infer.NET, programmation probabiliste |
+| Probas PyMC HMM | [Probas/PyMC-HMM-Trading-Alpha.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/Probas/PyMC-HMM-Trading-Alpha.ipynb) | PyMC, HMM, trading |
+| Tweety-4 Belief Revision | [SymbolicAI/Tweety/Tweety-4-Belief-Revision.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/SymbolicAI/Tweety/Tweety-4-Belief-Revision.ipynb) | AGM, revision des croyances |
+| QC-Py-28 Regime Detection | [QuantConnect/Python/QC-Py-28-Market-Regime-Detection.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/QuantConnect/Python/QC-Py-28-Market-Regime-Detection.ipynb) | Detection de regimes de marche |
+| QC-Py-10 Risk Portfolio | [QuantConnect/Python/QC-Py-10-Risk-Portfolio-Management.ipynb](https://github.com/jsboige/CoursIA/blob/main/MyIA.AI.Notebooks/QuantConnect/Python/QC-Py-10-Risk-Portfolio-Management.ipynb) | Gestion du risque, allocation |
+
+### References externes
+- Hamilton, J.D. (1989). "A New Approach to the Economic Analysis of Nonstationary Time Series." *Econometrica*, 57(2), 357-384. [JSTOR](https://www.jstor.org/stable/1912559)
+- Alchourron, C.E., Gardenfors, P. & Makinson, D. (1985). "On the Logic of Theory Change." *Journal of Symbolic Logic*, 50(2), 510-530. [JSTOR](https://www.jstor.org/stable/2274239)
+- Minka, T. et al. (2018). *Infer.NET 2: Bayesian Inference in .NET*. Microsoft Research. [dotnet.github.io](https://dotnet.github.io/infer/)
+- Wellman, M.P. (1990). "Fundamental Concepts of Qualitative Probabilistic Networks." *Artificial Intelligence*, 44(3), 257-303. [ScienceDirect](https://doi.org/10.1016/0004-3702(90)90001-H)
+- Ghahramani, Z. (2015). "Probabilistic Machine Learning and Artificial Intelligence." *Nature*, 521, 452-459. [Nature](https://doi.org/10.1038/nature14541)
+
+### Difficulte : 3/5
 
 ---
